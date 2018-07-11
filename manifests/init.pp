@@ -35,7 +35,7 @@
 #
 # [*cni_network_provider*]
 #
-#  The URL to get the cni providers yaml file. 
+#  The URL to get the cni providers yaml file.
 #  Defaults to `undef`. `kube_tool` sets this value.
 #
 # [*controller*]
@@ -44,7 +44,7 @@
 #
 # [*worker*]
 #   This is a bool that sets a node to a worker.
-#   defaults to false 
+#   defaults to false
 #
 # [*kube_api_advertise_address*]
 #   This is the ip address that the want to api server to expose.
@@ -62,10 +62,10 @@
 #
 # [*etcd_peers*]
 #   This will tell etcd how the list of peers to connect to into the cluster.
-#   An example with hiera would be kubernetes::etcd_peers: 
+#   An example with hiera would be kubernetes::etcd_peers:
 #                                  - 172.17.10.101
 #                                  - 172.17.10.102
-#                                  - 172.17.10.103    
+#                                  - 172.17.10.103
 #   Defaults to undef
 #
 # [*etcd_initial_cluster*]
@@ -130,7 +130,7 @@
 #   Defaults to undef
 #
 # [*node_label*]
-#  The name to assign the node in the cluster. 
+#  The name to assign the node in the cluster.
 #  Defaults to hostname
 #
 # [*token*]
@@ -219,6 +219,7 @@ class kubernetes (
   if $controller {
     include kubernetes::repos
     include kubernetes::packages
+    include kubernetes::prereq
     include kubernetes::config
     include kubernetes::service
     include kubernetes::cluster_roles
@@ -241,6 +242,7 @@ class kubernetes (
   if $worker {
     include kubernetes::repos
     include kubernetes::packages
+    include kubernetes::prereq
     include kubernetes::service
     include kubernetes::cluster_roles
     contain kubernetes::repos

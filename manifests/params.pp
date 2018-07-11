@@ -2,11 +2,32 @@
 
 class kubernetes::params {
 
-$kubernetes_version = '1.10.2'
-case $::osfamily {
-  'Debian' : {
+$kubernetes_version = '1.10.5'
+case $facts['osfamily'] {
+  'Debian':{
     $kubernetes_package_version = "${kubernetes_version}-00"
-    $docker_version = '17.03.0~ce-0~ubuntu-xenial'
+    case $facts['os']['name'] {
+      'Ubuntu':{
+        case $facts['os']['release']['major'] {
+          '14.04': {
+            $docker_version = '17.03.0~ce-0~ubuntu-trusty'
+          }
+          '16.04': {
+            $docker_version = '17.03.0~ce-0~ubuntu-xenial'
+          }
+        }
+      }
+      'Debian': {
+        case $facts['os']['release']['major'] {
+          '8': {
+            $docker_version = '17.03.0~ce-0~debian-jessie'
+          }
+          '9': {
+            $docker_version = '17.03.0~ce-0~debian-stretch'
+          }
+        }
+      }
+    }
   }
   'RedHat' : {
     $kubernetes_package_version = $kubernetes_version
