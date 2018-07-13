@@ -55,9 +55,9 @@ image.
 
 If Docker is not installed on your workstation, install it from [here](https://www.docker.com/community-edition).
 
-The kubetool docker image takes each parameter as an environment variable. 
+The kubetool docker image takes each parameter as an environment variable.
 
-**Note**: The version of kubetool you use must match the version of the module on the Puppet Forge. For example, if using the module version 1.0.0, use `puppet/kubetool:1.0.0`. 
+**Note**: The version of kubetool you use must match the version of the module on the Puppet Forge. For example, if using the module version 1.0.0, use `puppet/kubetool:1.0.0`.
 
 To output a yaml file into your working directory that corresponds to the operating system you want Kubernetes to run on, and for each controller node, run either of these `docker run` commands:
 
@@ -84,9 +84,9 @@ The parameters are:
 
 The kubetool creates:
 
-* A yaml file that corresponds to the operating system specified by the `OS` paramater. To view the file contents, run `cat Debian.yaml` for a Debian system, or run `cat RedHat.yaml` for RedHat. 
+* A yaml file that corresponds to the operating system specified by the `OS` paramater. To view the file contents, run `cat Debian.yaml` for a Debian system, or run `cat RedHat.yaml` for RedHat.
 
-The yaml files produced for each member of the etcd cluster contain certificate information to bootstrap an initial etcd cluster. Ensure these are also placed in your hieradata directory at the node level. 
+The yaml files produced for each member of the etcd cluster contain certificate information to bootstrap an initial etcd cluster. Ensure these are also placed in your hieradata directory at the node level.
 
 * A discovery token hash and encoded values required by Kubernetes. To regenerate the values, including certificates and tokens, run the `kubetool` command again.
 
@@ -96,7 +96,7 @@ Add the `{$OS}.yaml` file to the same [control repo](https://puppet.com/docs/pe/
 
 ### Configure your node
 
-After the `{$OS}.yaml` and `{$hostname}.yaml` files have been added to the Hiera directory on your Puppet server, configure your node as the controller or worker. 
+After the `{$OS}.yaml` and `{$hostname}.yaml` files have been added to the Hiera directory on your Puppet server, configure your node as the controller or worker.
 
 A controller node contains the control plane and `etcd`. In a production cluster you should have three, five, or seven controllers. A worker node runs your applications. You can add as many worker nodes as Kubernetes can handle. For information about nodes in Kubernetes, see the [Kubernetes docs](https://kubernetes.io/docs/concepts/architecture/nodes/#what-is-a-node).
 
@@ -159,7 +159,7 @@ Defaults to `1.10.2`.
 
 #### `cni_network_provider`
 
-The URL to get the cni providers yaml file. 
+The URL to get the cni providers yaml file.
 
 Defaults to `undef`. `kube_tool` sets this value.
 
@@ -235,7 +235,7 @@ Defaults to `undef`.
 
 Specifies how etcd lists the peers to connect to into the cluster.
 
-A hiera example is `kubernetes::etcd_peers`: 
+A hiera example is `kubernetes::etcd_peers`:
 * 172.17.10.101
 * 172.17.10.102
 * 172.17.10.103   
@@ -375,9 +375,9 @@ Defaults to `10.96.0.0/12`.
 
 #### `controller_address`
 
-The IP address and port for the controller the worker node joins. For example, `172.17.10.101:6443`. 
+The IP address and port for the controller the worker node joins. For example, `172.17.10.101:6443`.
 
-Defaults to `undef`. This value is set by `kube_tool`. 
+Defaults to `undef`. This value is set by `kube_tool`.
 
 #### `cloud_provider`
 
@@ -392,7 +392,7 @@ Defaults to `undef`.
 
 This module supports [Kubernetes 1.10.x](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md#v160) and above.
 
-The default container runtime for this module is [Docker]. This is considered stable, and the only officially supported runtime. Advanced [Kubernetes] users can use cri_containerd, however this requires a greater knowledge of [Kubernetes], spefically when running applications in a HA cluster. 
+The default container runtime for this module is [Docker]. This is considered stable, and the only officially supported runtime. Advanced [Kubernetes] users can use cri_containerd, however this requires a greater knowledge of [Kubernetes], spefically when running applications in a HA cluster.
 
 In order to run a HA cluster and access your applications, an external load balancer is required in front of your cluster. Setting this up is beyond the scope of this module, and it's recommended that users consult the [Kubernetes] documentation on load balancing in front of a cluster [here](https://kubernetes-v1-4.github.io/docs/user-guide/load-balancer/).
 
@@ -402,7 +402,8 @@ This module has been tested on the following OS
 
 RedHat 7.x
 CentOS 7.x
-Ubuntu 16.04
+Ubuntu 16.04 (aka Xenial Xerus)
+Debian 9.x (aka Stretch)
 
 ## Development
 
